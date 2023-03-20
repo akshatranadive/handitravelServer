@@ -1,10 +1,10 @@
 {
-  "name": "handitravelServer",
+  "name": "handitravelserver",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": "14.x"
