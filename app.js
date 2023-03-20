@@ -3,10 +3,13 @@ console.log("HandiTravel Server....");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+require('dotenv').config();
+
 
 const url =
-  "mongodb+srv://sharm591:Rankin%402023@cluster0.sbczo2p.mongodb.net/?retryWrites=true&w=majority";
+process.env.MONGODB_URI;
 
+console.log(url);
 mongoose.set("strictQuery", true);
 
 mongoose
@@ -34,7 +37,7 @@ app.use(require("./router/flights"));
 app.use(require("./router/buses"));
 app.use(require("./router/bannedMedicines"));
 
-app.listen(2023, () => {
+app.listen(process.env.PORT, () => {
   console.log("Port 2023");
 });
   
