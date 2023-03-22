@@ -19,11 +19,22 @@ router.get("/flights", async (req, res) => {
   const budget = Number(req.query.budget);
   let data;
 
-  const mongoQuery = {
-    arrival: arrival,
-    departure: departure,
-    cost: { $lte: budget },
-  };
+  let mongoQuery;
+  if(returnTrip == "true"){
+    mongoQuery = {
+      parisarrival: arrival,
+      departure: departure,
+      cost: { $lte: budget },
+    };
+  }
+  else{
+    mongoQuery = {
+      arrival: arrival,
+      departure: departure,
+      cost: { $lte: budget },
+    };
+  }
+
   console.log(mongoQuery);
   if (returnTrip == "true") {
     data = await returnFight.find(mongoQuery);
