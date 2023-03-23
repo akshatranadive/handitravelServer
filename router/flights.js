@@ -17,34 +17,52 @@ router.get("/flights", async (req, res) => {
   const from = req.query.from;
   const to = req.query.to;
   const budget = Number(req.query.budget);
-  let data;
+  const queryAmenities = req.query.amenities;
+  let data = [];
 
-  let mongoQuery;
-  if(returnTrip == "true"){
-    mongoQuery = {
-      parisarrival: arrival,
-      departure: departure,
-      cost: { $lte: budget },
-    };
-  }
-  else{
-    mongoQuery = {
-      arrival: arrival,
-      departure: departure,
-      cost: { $lte: budget },
-    };
-  }
+  const finalData = [];
 
-  console.log(mongoQuery);
+  const mongoQuery = {
+    arrival: arrival,
+    departure: departure,
+    cost: { $lte: budget },
+  };
+
+  const rQuery = {
+    arrival: departure,
+    departure: arrival,
+    cost: { $lte: budget },
+  };
+
   if (returnTrip == "true") {
-    data = await returnFight.find(mongoQuery);
-    console.log("Return " + data);
+    let result = await returnFight.find(mongoQuery);
+    data.push(result);
+
+    result = await returnFight.find(rQuery);
+    data.push(result);
   } else {
-    data = await singleFight.find(mongoQuery);
-    console.log("Single " + data);
+    let result = await singleFight.find(mongoQuery);
+    data.push(result);
   }
 
-  res.send(data);
+  // console.log(data);
+
+  data.forEach((element) => {
+    element.forEach((obj) => {
+      let match = 0;
+      queryAmenities.forEach((amenity) => {
+        if (obj.ammenities.includes(amenity)) {
+          match++;
+        }
+      });
+
+      if (match == queryAmenities.length) {
+        finalData.push(obj);
+      }
+    });
+  });
+
+  res.send(finalData);
 });
 
 module.exports = router;
