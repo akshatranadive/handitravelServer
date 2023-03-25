@@ -62,7 +62,7 @@ router.get("/flights", async (req, res) => {
     });
   });
 
-  res.send(data);
+  res.send(finalData);
 });
 
 module.exports = router;
