@@ -48,19 +48,19 @@ router.get("/flights", async (req, res) => {
   // console.log(data);
 
   data.forEach((element) => {
-    //element.forEach((obj) => {
-    //   let match = 0;
-    //   queryAmenities.forEach((amenity) => {
-    //     if (obj.ammenities.includes(amenity)) {
-    //       match++;
-    //     }
-    //   });
+    element.forEach((obj) => {
+      // let match = 0;
+      // queryAmenities.forEach((amenity) => {
+      //   if (obj.ammenities.includes(amenity)) {
+      //     match++;
+      //   }
+      // });
 
-    //   if (match == queryAmenities.length) {
-    //     finalData.push(obj);
-    //   }
-    // });
-    finalData.push(element);
+      // if (match == queryAmenities.length) {
+      //   finalData.push(obj);
+      // }
+      finalData.push(obj);
+    });
   });
 
   res.send(finalData);
