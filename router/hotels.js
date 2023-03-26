@@ -18,19 +18,20 @@ router.get("/hotel", async (req, res) => {
   const hotelData = await hotelModel.find(mongoQuery);
   console.log(hotelData);
   const finalData = [];
+  finalData.push(hotelData);
 
-  hotelData.forEach((element) => {
-    let match = 0;
-    queryAmenities.forEach((amenity) => {
-      if (element.amenities.includes(amenity)) {
-        match++;
-      }
-    });
+  // hotelData.forEach((element) => {
+  //   let match = 0;
+  //   queryAmenities.forEach((amenity) => {
+  //     if (element.amenities.includes(amenity)) {
+  //       match++;
+  //     }
+  //   });
 
-    if (match == queryAmenities.length) {
-      finalData.push(element);
-    }
-  });
+  //   if (match == queryAmenities.length) {
+  //     finalData.push(element);
+  //   }
+  // });
   //console.log(finalData);
   res.send(finalData);
 });

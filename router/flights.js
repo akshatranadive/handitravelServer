@@ -44,25 +44,27 @@ router.get("/flights", async (req, res) => {
     let result = await singleFight.find(mongoQuery);
     data.push(result);
   }
+    finalData.push(data);
+
 
   // console.log(data);
 
-  data.forEach((element) => {
-    element.forEach((obj) => {
-      let match = 0;
-      queryAmenities.forEach((amenity) => {
-        if (obj.ammenities.includes(amenity)) {
-          match++;
-        }
-      });
+//   data.forEach((element) => {
+//     element.forEach((obj) => {
+//       let match = 0;
+//       queryAmenities.forEach((amenity) => {
+//         if (obj.ammenities.includes(amenity)) {
+//           match++;
+//         }
+//       });
 
-      if (match == queryAmenities.length) {
-        finalData.push(obj);
-      }
-    });
-  });
+//       if (match == queryAmenities.length) {
+//         finalData.push(obj);
+//       }
+//     });
+//   });
 
-  res.send(finalData);
-});
+//   res.send(finalData);
+ });
 
 module.exports = router;
