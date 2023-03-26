@@ -21,16 +21,21 @@ router.get("/hotel", async (req, res) => {
 
   hotelData.forEach((element) => {
     let match = 0;
-    queryAmenities.forEach((amenity) => {
-      if (element.amenities.includes(amenity)) {
-        match++;
-      }
-    });
+    if(queryAmenities){
 
-    if (match == queryAmenities.length) {
+      queryAmenities.forEach((amenity) => {
+        if (element.amenities.includes(amenity)) {
+          match++;
+        }
+      });
+  
+      if (match == queryAmenities.length) {
+        finalData.push(element);
+      }
+    }
+    else{
       finalData.push(element);
     }
-    // finalData.push(element);
   });
   //console.log(finalData);
   res.send(finalData);
