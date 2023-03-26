@@ -20,23 +20,21 @@ router.get("/buses", async (req, res) => {
   };
   const finalData = [];
   data = await bus.find(mongoQuery);
-  finalData.push(data);
 
+  data.forEach((obj) => {
+    let match = 0;
+    queryAmenities.forEach((amenity) => {
+      if (obj.amenities.includes(amenity)) {
+        match++;
+      }
+    });
 
-  // data.forEach((obj) => {
-  //   let match = 0;
-  //   queryAmenities.forEach((amenity) => {
-  //     if (obj.amenities.includes(amenity)) {
-  //       match++;
-  //     }
-  //   });
+    if (match == queryAmenities.length) {
+      finalData.push(obj);
+    }
+  });
 
-  //   if (match == queryAmenities.length) {
-  //     finalData.push(obj);
-  //   }
-  // });
-
-  // res.send(finalData);
+  res.send(finalData);
 });
 
 module.exports = router;
