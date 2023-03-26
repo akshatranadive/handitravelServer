@@ -22,17 +22,21 @@ router.get("/buses", async (req, res) => {
   data = await bus.find(mongoQuery);
 
   data.forEach((obj) => {
-    let match = 0;
-    queryAmenities.forEach((amenity) => {
-      if (obj.amenities.includes(amenity)) {
-        match++;
+    if(queryAmenities){
+      let match = 0;
+      queryAmenities.forEach((amenity) => {
+        if (obj.amenities.includes(amenity)) {
+          match++;
+        }
+      });
+  
+      if (match == queryAmenities.length) {
+        finalData.push(obj);
       }
-    });
-
-    if (match == queryAmenities.length) {
+    }
+    else{
       finalData.push(obj);
     }
-    // finalData.push(obj);
   });
 
   res.send(finalData);

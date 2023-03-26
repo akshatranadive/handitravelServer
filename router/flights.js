@@ -49,17 +49,21 @@ router.get("/flights", async (req, res) => {
 
   data.forEach((element) => {
     element.forEach((obj) => {
-      let match = 0;
-      queryAmenities.forEach((amenity) => {
-        if (obj.ammenities.includes(amenity)) {
-          match++;
+      if(queryAmenities){
+        let match = 0;
+        queryAmenities.forEach((amenity) => {
+          if (obj.ammenities.includes(amenity)) {
+            match++;
+          }
+        });
+  
+        if (match == queryAmenities.length) {
+          finalData.push(obj);
         }
-      });
-
-      if (match == queryAmenities.length) {
+      }
+      else{
         finalData.push(obj);
       }
-      // finalData.push(obj);
     });
   });
 
