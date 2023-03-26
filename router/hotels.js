@@ -11,7 +11,7 @@ router.get("/hotel", async (req, res) => {
 
   //regex finds if the subString in the String 
   const mongoQuery = {
-    location: { $regex: location },
+    // location: { $regex: location },
     bestPrice: { $lte: budget },
   };
 
